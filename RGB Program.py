@@ -162,11 +162,21 @@ stack_outward=[
     '1111110000111111','1111110110111111',
     '1111111001111111','1111111111111111']
 
-follow_right=[
+single_right=[
+    '1001001001001001',
+    '0100100100100100',
+    '0010010010010010']
+
+single_left=[
+    '1001001001001001',
+    '0010010010010010',
+    '0100100100100100']
+
+double_right=[
     '1100110011001100','0110011001100110',
     '0011001100110011','1001100110011001']
 
-follow_left=[
+double_left=[
     '0011001100110011','0110011001100110',
     '1100110011001100','1001100110011001']
 
@@ -183,32 +193,24 @@ for i in range(16):
     GPIO.output(latch,1)
     GPIO.output(clock,0)
 
-def pass_chaser():
+def chaser_test():    
     
-    for p in RGB_logic1:    
-        for x in p:
-            exec(RGB_off);exec(x)
-            for i in chaser_pass:
-                for j in range(16):
-                    GPIO.output(latch,0)
-                    GPIO.output(data_bit,int(i[j]))
-                    GPIO.output(clock,1)
-                    GPIO.output(latch,1)
-                    GPIO.output(clock,0)
-                wait(led_speed)
-                
-def colapse_chaser():
-    
-    while True:
-        for i in follow_right:
-            exec(RGB_off)
-            exec(RGB_logic2[1])
-            for j in range(16):
-                GPIO.output(latch,0)
-                GPIO.output(data_bit,int(i[j]))
-                GPIO.output(clock,1)
-                GPIO.output(latch,1)
-                GPIO.output(clock,0)
-            wait(led_speed)               
+    for i in chaser_pass:
+        for j in range(16):
+            GPIO.output(latch,0)
+            GPIO.output(data_bit,int(i[j]))
+            GPIO.output(clock,1)
+            GPIO.output(latch,1)
+            GPIO.output(clock,0)
+        wait(led_speed)
+        
+chaser_test()
 
-pass_chaser()
+'''
+for p in RGB_logic1:    
+    for x in p:
+        exec(RGB_off);exec(x)
+        
+exec(RGB_off)
+exec(RGB_logic2[1])
+'''
