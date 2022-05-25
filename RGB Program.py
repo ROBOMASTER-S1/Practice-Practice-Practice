@@ -197,12 +197,12 @@ def pass_chaser():
                     GPIO.output(clock,0)
                 wait(led_speed)
                 
-def colapse_chasser():
+def colapse_chaser():
     
     while True:
         for i in follow_right:
             exec(RGB_off)
-            exec(RGB_logic2[0])
+            exec(RGB_logic2[1])
             for j in range(16):
                 GPIO.output(latch,0)
                 GPIO.output(data_bit,int(i[j]))
